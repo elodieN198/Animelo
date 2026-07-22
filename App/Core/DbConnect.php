@@ -11,7 +11,7 @@ class DbConnect
 
     public function __construct()
     {
-        $host = 'localhost';
+        $host = '127.0.0.1';
         $dbname = 'animelo';
         $user = 'root';
         $password = '';
