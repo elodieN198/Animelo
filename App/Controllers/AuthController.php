@@ -34,7 +34,6 @@ class AuthController extends Controller
         $motDePasseHache = password_hash($motDePasse, PASSWORD_DEFAULT);
         $id = $model->create($nom, $email, $motDePasseHache);
 
-        session_start();
         $_SESSION['utilisateur_id'] = $id;
         $_SESSION['utilisateur_nom'] = $nom;
 
@@ -59,7 +58,6 @@ class AuthController extends Controller
             die('Email ou mot de passe incorrect !');
         }
 
-        session_start();
         $_SESSION['utilisateur_id'] = $utilisateur->id;
         $_SESSION['utilisateur_nom'] = $utilisateur->nom;
 
@@ -69,7 +67,6 @@ class AuthController extends Controller
 
     public function deconnexion()
     {
-        session_start();
         session_destroy();
         header('Location: /index.php?controller=auth&action=connexion');
         exit;
