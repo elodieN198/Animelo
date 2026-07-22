@@ -1,41 +1,48 @@
-<h1>Fil d'actualité</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Fil d'actualité</h1>
+    <div>
+        <span class="me-3">Connecté en tant que <?= htmlspecialchars($_SESSION['utilisateur_nom']) ?></span>
+        <a href="/index.php?controller=post&action=profil" class="btn btn-outline-secondary btn-sm">Mon profil</a>
+        <a href="/index.php?controller=auth&action=deconnexion" class="btn btn-outline-secondary btn-sm">Se déconnecter</a>
+    </div>
+</div>
 
-<p>
-    Connecté en tant que <?= htmlspecialchars($_SESSION['utilisateur_nom']) ?> —
-    <a href="/index.php?controller=post&action=profil">Mon profil</a> |
-    <a href="/index.php?controller=auth&action=deconnexion">Se déconnecter</a>
-</p>
+<a href="/index.php?controller=post&action=ajouter" class="btn btn-success mb-3">+ Ajouter un post</a>
 
-<a href="/index.php?controller=post&action=ajouter">+ Ajouter un post</a>
-
-<form action="/index.php" method="GET">
+<form action="/index.php" method="GET" class="row g-2 mb-4">
     <input type="hidden" name="controller" value="post">
     <input type="hidden" name="action" value="index">
-    <input type="text" name="recherche" placeholder="Rechercher un animé..." value="<?= htmlspecialchars($recherche) ?>">
-    <select name="tri">
-        <option value="date" <?= $tri === 'date' ? 'selected' : '' ?>>Plus récent</option>
-        <option value="likes" <?= $tri === 'likes' ? 'selected' : '' ?>>Plus liké</option>
-    </select>
-    <button type="submit">Filtrer</button>
+    <div class="col-auto">
+        <input type="text" name="recherche" class="form-control" placeholder="Rechercher un animé..." value="<?= htmlspecialchars($recherche) ?>">
+    </div>
+    <div class="col-auto">
+        <select name="tri" class="form-select">
+            <option value="date" <?= $tri === 'date' ? 'selected' : '' ?>>Plus récent</option>
+            <option value="likes" <?= $tri === 'likes' ? 'selected' : '' ?>>Plus liké</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filtrer</button>
+    </div>
 </form>
 
 <?php if (empty($posts)): ?>
     <p>Aucun post pour l'instant.</p>
 <?php else: ?>
     <?php foreach ($posts as $post): ?>
-        <div class="post" data-post-id="<?= $post->id ?>">
-            <h2><?= htmlspecialchars($post->titreAnime) ?></h2>
-            <p>Publié par <?= htmlspecialchars($post->auteurNom) ?></p>
+        <div class="card mb-3" data-post-id="<?= $post->id ?>">
             <?php if ($post->image): ?>
-                <img src="/uploads/<?= htmlspecialchars($post->image) ?>" alt="<?= htmlspecialchars($post->titreAnime) ?>" width="200">
+                <img src="/uploads/<?= htmlspecialchars($post->image) ?>" class="card-img-top" alt="<?= htmlspecialchars($post->titreAnime) ?>" style="max-height: 300px; object-fit: cover;">
             <?php endif; ?>
-            <p><?= htmlspecialchars($post->description) ?></p>
-            <p>
-                <button class="btn-like" data-post-id="<?= $post->id ?>">👍 Like</button>
-                <span class="nb-likes"><?= $post->nbLikes ?></span> likes
-            </p>
+            <div class="card-body">
+                <h2 class="card-title h4"><?= htmlspecialchars($post->titreAnime) ?></h2>
+                <p class="text-muted">Publié par <?= htmlspecialchars($post->auteurNom) ?></p>
+                <p class="card-text"><?= htmlspecialchars($post->description) ?></p>
+                <button class="btn btn-outline-primary btn-like" data-post-id="<?= $post->id ?>">👍 Like</button>
+                <span class="nb-likes fw-bold ms-2"><?= $post->nbLikes ?></span> likes
+            </div>
         </div>
-        <hr>
     <?php endforeach; ?>
 <?php endif; ?>
+
 <script src="/js/likes.js"></script>

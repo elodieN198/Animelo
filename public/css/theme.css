@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+JP:wght@400;500&display=swap');
+
+:root {
+  --color-shu: #B7282E;
+  --color-shu-dark: #8E1F24;
+  --color-sumi: #1A1A1A;
+  --color-kin: #C9A227;
+  --color-washi: #F7F2E7;
+}
+
+body {
+  background-color: var(--color-washi);
+  color: var(--color-sumi);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+h1, h2, h3, .navbar-brand {
+  font-family: 'Shippori Mincho', serif;
+}
+
+.navbar {
+  background-color: var(--color-sumi) !important;
+  border-bottom: 3px solid var(--color-kin);
+}
+
+.navbar-brand {
+  color: var(--color-washi) !important;
+  position: relative;
+  padding-left: 2.2rem;
+}
+
+.navbar-brand::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.6rem;
+  height: 1.6rem;
+  background: var(--color-shu);
+  border-radius: 50%;
+  border: 2px solid var(--color-kin);
+}
+
+.btn-primary, .btn-success {
+  background-color: var(--color-shu);
+  border-color: var(--color-shu);
+}
+.btn-primary:hover, .btn-success:hover {
+  background-color: var(--color-shu-dark);
+  border-color: var(--color-shu-dark);
+}
+
+.btn-outline-primary, .btn-outline-secondary {
+  color: var(--color-shu);
+  border-color: var(--color-shu);
+}
+.btn-outline-primary:hover, .btn-outline-secondary:hover {
+  background-color: var(--color-shu);
+  color: var(--color-washi);
+}
+
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 3px solid var(--color-kin);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.nb-likes {
+  color: var(--color-shu);
+}
