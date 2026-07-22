@@ -38,3 +38,4 @@
         <hr>
     <?php endforeach; ?>
 <?php endif; ?>
+<script src="/js/likes.js"></script>

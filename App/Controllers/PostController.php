@@ -58,6 +58,27 @@ class PostController extends Controller
         exit;
     }
 
+    public function like()
+    {
+        $this->verifierAuth();
+
+        header('Content-Type: application/json');
+
+        $postId = (int) ($_POST['postId'] ?? 0);
+
+        if ($postId <= 0) {
+            http_response_code(400);
+            echo json_encode(['erreur' => 'ID de post invalide']);
+            exit;
+        }
+
+        $model = new PostModel();
+        $nouveauTotal = $model->incrementerLikes($postId);
+
+        echo json_encode(['nbLikes' => $nouveauTotal]);
+        exit;
+    }
+
     public function profil()
     {
         $this->verifierAuth();
