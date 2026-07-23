@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
-            <span class="navbar-brand mb-0 h1">Animelo</span>
+            <a href="/index.php?controller=home&action=index" class="navbar-brand mb-0 h1 text-decoration-none">Animelo</a>
         </div>
     </nav>
 
