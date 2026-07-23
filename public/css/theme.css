@@ -82,48 +82,55 @@ h1, h2, h3, .navbar-brand {
   background-color: #f0ece2;
 }
 
-.search-box {
-  position: relative;
-}
-.search-box .bi-search {
-  position: absolute;
-  left: 0.9rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-  pointer-events: none;
-}
-.search-input {
-  padding-left: 2.3rem;
-  border-radius: 999px;
+.search-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #fff;
   border: 1px solid #ddd;
-  background-color: var(--color-washi);
+  border-radius: 999px;
+  padding: 0.5rem 0.7rem 0.5rem 1.1rem;
+  max-width: 380px;
 }
-.search-input:focus {
+.search-filter-bar:focus-within {
   border-color: var(--color-shu);
   box-shadow: 0 0 0 0.2rem rgba(183, 40, 46, 0.15);
 }
-
-.sort-select {
-  border-radius: 999px;
-  border: 1px solid #ddd;
-  background-color: var(--color-washi);
+.search-filter-bar .bi-search {
+  color: #999;
 }
-
-.btn-search-submit {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+.search-filter-input {
   border: none;
-  background-color: var(--color-shu);
-  color: white;
+  background: transparent;
+  outline: none;
+  flex-grow: 1;
+  min-width: 0;
+  font-size: 0.95rem;
+}
+.search-filter-divider {
+  width: 1px;
+  height: 22px;
+  background-color: #ddd;
+  flex-shrink: 0;
+}
+.filter-trigger {
+  border: none;
+  background: transparent;
+  color: var(--color-shu);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
-.btn-search-submit:hover {
-  background-color: var(--color-shu-dark);
+.filter-trigger:hover {
+  background-color: rgba(183, 40, 46, 0.1);
+}
+.dropdown-item.active {
+  background-color: var(--color-shu) !important;
+  color: white !important;
 }
 
 .btn-new-post {
@@ -176,4 +183,35 @@ h1, h2, h3, .navbar-brand {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.feed-image-btn {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: #f0ece2;
+  cursor: pointer;
+}
+
+.feed-image-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.feed-image-btn:hover img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 575.98px) {
+  .search-filter-bar {
+    max-width: none;
+  }
+  .btn-new-post {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
 }
