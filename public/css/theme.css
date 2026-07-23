@@ -25,21 +25,6 @@ h1, h2, h3, .navbar-brand {
 
 .navbar-brand {
   color: var(--color-washi) !important;
-  position: relative;
-  padding-left: 2.2rem;
-}
-
-.navbar-brand::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1.6rem;
-  height: 1.6rem;
-  background: var(--color-shu);
-  border-radius: 50%;
-  border: 2px solid var(--color-kin);
 }
 
 .btn-primary, .btn-success {
