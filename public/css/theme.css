@@ -69,3 +69,126 @@ h1, h2, h3, .navbar-brand {
 .nb-likes {
   color: var(--color-shu);
 }
+
+.instagram-tile {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #f0ece2;
+  cursor: pointer;
+}
+
+.instagram-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.instagram-tile:hover img {
+  transform: scale(1.05);
+}
+
+.instagram-tile-empty {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #f0ece2;
+}
+
+.search-box {
+  position: relative;
+}
+.search-box .bi-search {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+.search-input {
+  padding-left: 2.3rem;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background-color: var(--color-washi);
+}
+.search-input:focus {
+  border-color: var(--color-shu);
+  box-shadow: 0 0 0 0.2rem rgba(183, 40, 46, 0.15);
+}
+
+.sort-select {
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background-color: var(--color-washi);
+}
+
+.btn-search-submit {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-shu);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.btn-search-submit:hover {
+  background-color: var(--color-shu-dark);
+}
+
+.btn-new-post {
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.post-form-card {
+  width: 100%;
+  max-width: 560px;
+  background-color: #fff;
+  border: 1px solid #e8e2d4;
+  border-top: 3px solid var(--color-kin);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.rounded-input {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: var(--color-washi);
+}
+.rounded-input:focus {
+  border-color: var(--color-shu);
+  box-shadow: 0 0 0 0.2rem rgba(183, 40, 46, 0.15);
+}
+
+.image-upload-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 180px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  background-color: var(--color-washi);
+  cursor: pointer;
+  overflow: hidden;
+  color: #999;
+}
+.image-upload-zone:hover {
+  border-color: var(--color-shu);
+  color: var(--color-shu);
+}
+.image-upload-zone .bi-image {
+  font-size: 2rem;
+}
+.image-upload-zone img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

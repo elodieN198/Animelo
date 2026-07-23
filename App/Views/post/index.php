@@ -7,24 +7,26 @@
     </div>
 </div>
 
-<a href="/index.php?controller=post&action=ajouter" class="btn btn-success mb-3">+ Ajouter un post</a>
-
-<form action="/index.php" method="GET" class="row g-2 mb-4">
-    <input type="hidden" name="controller" value="post">
-    <input type="hidden" name="action" value="index">
-    <div class="col-auto">
-        <input type="text" name="recherche" class="form-control" placeholder="Rechercher un animé..." value="<?= htmlspecialchars($recherche) ?>">
-    </div>
-    <div class="col-auto">
-        <select name="tri" class="form-select">
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+    <form action="/index.php" method="GET" class="d-flex flex-wrap gap-2 align-items-center flex-grow-1">
+        <input type="hidden" name="controller" value="post">
+        <input type="hidden" name="action" value="index">
+        <div class="search-box flex-grow-1" style="max-width: 320px;">
+            <i class="bi bi-search"></i>
+            <input type="text" name="recherche" class="form-control search-input" placeholder="Rechercher un animé..." value="<?= htmlspecialchars($recherche) ?>">
+        </div>
+        <select name="tri" class="form-select sort-select" style="max-width: 170px;" onchange="this.form.submit()">
             <option value="date" <?= $tri === 'date' ? 'selected' : '' ?>>Plus récent</option>
             <option value="likes" <?= $tri === 'likes' ? 'selected' : '' ?>>Plus liké</option>
         </select>
-    </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary">Filtrer</button>
-    </div>
-</form>
+        <button type="submit" class="btn-search-submit" aria-label="Rechercher">
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </form>
+    <a href="/index.php?controller=post&action=ajouter" class="btn btn-primary btn-new-post">
+        <i class="bi bi-plus-lg"></i> Nouveau post
+    </a>
+</div>
 
 <?php if (empty($posts)): ?>
     <p>Aucun post pour l'instant.</p>
