@@ -1,11 +1,14 @@
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
     <div>
-        <h1 class="h3 mb-1">Fil d'actualité</h1>
-        <p class="text-muted mb-0">Connecté en tant que <?= htmlspecialchars($_SESSION['utilisateur_nom']) ?></p>
+        <h1 class="h3 mb-0">Fil d'actualité</h1>
     </div>
     <div class="d-flex gap-2">
-        <a href="/index.php?controller=post&action=profil" class="btn btn-outline-secondary rounded-pill btn-sm px-3">Mon profil</a>
-        <a href="/index.php?controller=auth&action=deconnexion" class="btn btn-outline-secondary rounded-pill btn-sm px-3">Se déconnecter</a>
+        <a href="/index.php?controller=post&action=profil" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
+            <i class="bi bi-person"></i> <span class="d-none d-sm-inline">Mon profil</span>
+        </a>
+        <a href="/index.php?controller=auth&action=deconnexion" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
+            <i class="bi bi-box-arrow-right"></i> <span class="d-none d-sm-inline">Se déconnecter</span>
+        </a>
     </div>
 </div>
 

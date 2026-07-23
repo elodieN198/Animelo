@@ -8,5 +8,6 @@ class Utilisateur
     public string $nom = '';
     public string $email = '';
     public string $motDePasse = '';
+    public ?string $photoProfil = null;
     public ?string $dateCreation = null;
 }

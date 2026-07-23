@@ -1,11 +1,31 @@
-<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+<div class="d-flex justify-content-end gap-2 mb-3">
+    <a href="/index.php?controller=post&action=index" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
+        <i class="bi bi-house"></i> <span class="d-none d-sm-inline">Fil d'actualité</span>
+    </a>
+    <a href="/index.php?controller=auth&action=deconnexion" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
+        <i class="bi bi-box-arrow-right"></i> <span class="d-none d-sm-inline">Se déconnecter</span>
+    </a>
+</div>
+
+<div class="d-flex align-items-center gap-3 mb-4">
+    <form action="/index.php?controller=post&action=modifierPhotoProfil" method="POST" enctype="multipart/form-data" id="avatarForm">
+        <label for="avatarInput" class="avatar-upload">
+            <?php if ($utilisateur->photoProfil): ?>
+                <img src="/uploads/<?= htmlspecialchars($utilisateur->photoProfil) ?>" alt="Photo de profil">
+            <?php else: ?>
+                <div class="avatar-placeholder">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+            <?php endif; ?>
+            <span class="avatar-overlay">
+                <i class="bi bi-camera-fill"></i>
+            </span>
+        </label>
+        <input type="file" id="avatarInput" name="photoProfil" class="d-none" accept="image/*" onchange="document.getElementById('avatarForm').submit()">
+    </form>
+
     <div>
-        <h1 class="h3 mb-1">Mon profil</h1>
-        <p class="text-muted mb-0">Connecté en tant que <?= htmlspecialchars($_SESSION['utilisateur_nom']) ?></p>
-    </div>
-    <div class="d-flex gap-2">
-        <a href="/index.php?controller=post&action=index" class="btn btn-outline-secondary rounded-pill btn-sm px-3">Fil d'actualité</a>
-        <a href="/index.php?controller=auth&action=deconnexion" class="btn btn-outline-secondary rounded-pill btn-sm px-3">Se déconnecter</a>
+        <h1 class="h3 mb-0"><?= htmlspecialchars($utilisateur->nom) ?></h1>
     </div>
 </div>
 

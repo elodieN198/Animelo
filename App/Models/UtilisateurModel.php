@@ -48,6 +48,12 @@ class UtilisateurModel extends DbConnect
         return (int) $this->db->lastInsertId();
     }
 
+    public function updatePhotoProfil(int $id, string $nomFichier): void
+    {
+        $stmt = $this->db->prepare('UPDATE utilisateurs SET photo_profil = :photo WHERE id = :id');
+        $stmt->execute(['photo' => $nomFichier, 'id' => $id]);
+    }
+
     private function hydrate(array $row): Utilisateur
     {
         $utilisateur = new Utilisateur();
@@ -55,6 +61,7 @@ class UtilisateurModel extends DbConnect
         $utilisateur->nom = $row['nom'];
         $utilisateur->email = $row['email'];
         $utilisateur->motDePasse = $row['mot_de_passe'];
+        $utilisateur->photoProfil = $row['photo_profil'] ?? null;
         $utilisateur->dateCreation = $row['date_creation'];
 
         return $utilisateur;

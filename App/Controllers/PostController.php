@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\PostModel;
+use App\Models\UtilisateurModel;
 
 class PostController extends Controller
 {
@@ -83,13 +84,35 @@ class PostController extends Controller
     {
         $this->verifierAuth();
 
-        $model = new PostModel();
-        $posts = $model->findByUser($_SESSION['utilisateur_id']);
+        $utilisateurModel = new UtilisateurModel();
+        $utilisateur = $utilisateurModel->findById($_SESSION['utilisateur_id']);
+
+        $postModel = new PostModel();
+        $posts = $postModel->findByUser($_SESSION['utilisateur_id']);
 
         $this->render('post/profil', [
             'title' => 'Mon profil - Animelo',
             'posts' => $posts,
+            'utilisateur' => $utilisateur,
         ]);
+    }
+
+    public function modifierPhotoProfil()
+    {
+        $this->verifierAuth();
+
+        if (isset($_FILES['photoProfil']) && $_FILES['photoProfil']['error'] === UPLOAD_ERR_OK) {
+            $extension = pathinfo($_FILES['photoProfil']['name'], PATHINFO_EXTENSION);
+            $nomFichier = uniqid('avatar_') . '.' . $extension;
+            $destination = __DIR__ . '/../../public/uploads/' . $nomFichier;
+            move_uploaded_file($_FILES['photoProfil']['tmp_name'], $destination);
+
+            $model = new UtilisateurModel();
+            $model->updatePhotoProfil($_SESSION['utilisateur_id'], $nomFichier);
+        }
+
+        header('Location: /index.php?controller=post&action=profil');
+        exit;
     }
 
     private function verifierAuth()
