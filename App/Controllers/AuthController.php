@@ -34,6 +34,7 @@ class AuthController extends Controller
         $motDePasseHache = password_hash($motDePasse, PASSWORD_DEFAULT);
         $id = $model->create($nom, $email, $motDePasseHache);
 
+        session_regenerate_id(true);
         $_SESSION['utilisateur_id'] = $id;
         $_SESSION['utilisateur_nom'] = $nom;
 
@@ -58,6 +59,7 @@ class AuthController extends Controller
             $this->erreur('Email ou mot de passe incorrect !', 401);
         }
 
+        session_regenerate_id(true);
         $_SESSION['utilisateur_id'] = $utilisateur->id;
         $_SESSION['utilisateur_nom'] = $utilisateur->nom;
 
