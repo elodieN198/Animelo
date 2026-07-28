@@ -18,17 +18,17 @@ class AuthController extends Controller
         $motDePasse = $_POST['motDePasse'] ?? '';
 
         if ($nom === '' || $email === '' || $motDePasse === '') {
-            die('Tous les champs sont obligatoires !');
+            $this->erreur('Tous les champs sont obligatoires !');
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            die('Adresse email invalide !');
+            $this->erreur('Adresse email invalide !');
         }
 
         $model = new UtilisateurModel();
 
         if ($model->findByEmail($email)) {
-            die('Cet email est déjà utilisé !');
+            $this->erreur('Cet email est déjà utilisé !');
         }
 
         $motDePasseHache = password_hash($motDePasse, PASSWORD_DEFAULT);
@@ -55,7 +55,7 @@ class AuthController extends Controller
         $utilisateur = $model->findByEmail($email);
 
         if (!$utilisateur || !password_verify($motDePasse, $utilisateur->motDePasse)) {
-            die('Email ou mot de passe incorrect !');
+            $this->erreur('Email ou mot de passe incorrect !', 401);
         }
 
         $_SESSION['utilisateur_id'] = $utilisateur->id;

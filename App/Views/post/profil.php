@@ -39,20 +39,28 @@
     <div class="row row-cols-2 row-cols-md-3 g-2">
         <?php foreach ($posts as $post): ?>
             <div class="col">
-                <?php if ($post->image): ?>
-                    <button type="button"
-                            class="instagram-tile border-0 p-0"
-                            data-bs-toggle="modal"
-                            data-bs-target="#postImageModal"
-                            data-image="/uploads/<?= htmlspecialchars($post->image) ?>"
-                            data-title="<?= htmlspecialchars($post->titreAnime) ?>"
-                            data-description="<?= htmlspecialchars($post->description) ?>"
-                            data-likes="<?= $post->nbLikes ?>">
-                        <img src="/uploads/<?= htmlspecialchars($post->image) ?>" alt="<?= htmlspecialchars($post->titreAnime) ?>">
-                    </button>
-                <?php else: ?>
-                    <div class="instagram-tile-empty"></div>
-                <?php endif; ?>
+                <div class="position-relative">
+                    <?php if ($post->image): ?>
+                        <button type="button"
+                                class="instagram-tile border-0 p-0"
+                                data-bs-toggle="modal"
+                                data-bs-target="#postImageModal"
+                                data-image="/uploads/<?= htmlspecialchars($post->image) ?>"
+                                data-title="<?= htmlspecialchars($post->titreAnime) ?>"
+                                data-description="<?= htmlspecialchars($post->description) ?>"
+                                data-likes="<?= $post->nbLikes ?>">
+                            <img src="/uploads/<?= htmlspecialchars($post->image) ?>" alt="<?= htmlspecialchars($post->titreAnime) ?>">
+                        </button>
+                    <?php else: ?>
+                        <div class="instagram-tile-empty"></div>
+                    <?php endif; ?>
+                    <a href="/index.php?controller=post&action=supprimer&id=<?= $post->id ?>"
+                       class="delete-post-btn"
+                       onclick="return confirm('Supprimer ce post ?');"
+                       aria-label="Supprimer ce post">
+                        <i class="bi bi-trash3-fill"></i>
+                    </a>
+                </div>
                 <p class="small mt-1 mb-0 text-truncate text-muted"><?= htmlspecialchars($post->titreAnime) ?> · <?= $post->nbLikes ?> likes</p>
             </div>
         <?php endforeach; ?>

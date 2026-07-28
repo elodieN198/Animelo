@@ -22,4 +22,14 @@ abstract class Controller
 
         require __DIR__ . '/../Views/base.php';
     }
+
+    protected function erreur(string $message, int $code = 400): void
+    {
+        http_response_code($code);
+        $this->render('erreur', [
+            'title' => 'Erreur - Animelo',
+            'message' => $message,
+        ]);
+        exit;
+    }
 }

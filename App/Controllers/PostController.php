@@ -7,6 +7,9 @@ use App\Models\UtilisateurModel;
 
 class PostController extends Controller
 {
+    private const TYPES_IMAGE_AUTORISES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    private const TAILLE_IMAGE_MAX = 5 * 1024 * 1024; // 5 Mo
+
     public function index()
     {
         $this->verifierAuth();
@@ -40,22 +43,48 @@ class PostController extends Controller
         $description = trim($_POST['description'] ?? '');
 
         if ($titreAnime === '') {
-            die('Le titre de l\'animé est obligatoire !');
+            $this->erreur('Le titre de l\'animé est obligatoire !');
         }
 
         $nomImage = null;
 
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-            $nomImage = uniqid('post_') . '.' . $extension;
-            $destination = __DIR__ . '/../../public/uploads/' . $nomImage;
-            move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+            $nomImage = $this->traiterUploadImage($_FILES['image'], 'post_');
         }
 
         $model = new PostModel();
         $model->create($titreAnime, $description, $nomImage, $_SESSION['utilisateur_id']);
 
         header('Location: /index.php?controller=post&action=index');
+        exit;
+    }
+
+    public function supprimer()
+    {
+        $this->verifierAuth();
+
+        $postId = (int) ($_GET['id'] ?? 0);
+        $model = new PostModel();
+        $post = $model->findById($postId);
+
+        if (!$post) {
+            $this->erreur('Ce post n\'existe pas.', 404);
+        }
+
+        if ($post->utilisateurId !== (int) $_SESSION['utilisateur_id']) {
+            $this->erreur('Tu ne peux pas supprimer un post qui ne t\'appartient pas.', 403);
+        }
+
+        if ($post->image) {
+            $cheminImage = __DIR__ . '/../../public/uploads/' . $post->image;
+            if (file_exists($cheminImage)) {
+                unlink($cheminImage);
+            }
+        }
+
+        $model->delete($postId);
+
+        header('Location: /index.php?controller=post&action=profil');
         exit;
     }
 
@@ -102,10 +131,7 @@ class PostController extends Controller
         $this->verifierAuth();
 
         if (isset($_FILES['photoProfil']) && $_FILES['photoProfil']['error'] === UPLOAD_ERR_OK) {
-            $extension = pathinfo($_FILES['photoProfil']['name'], PATHINFO_EXTENSION);
-            $nomFichier = uniqid('avatar_') . '.' . $extension;
-            $destination = __DIR__ . '/../../public/uploads/' . $nomFichier;
-            move_uploaded_file($_FILES['photoProfil']['tmp_name'], $destination);
+            $nomFichier = $this->traiterUploadImage($_FILES['photoProfil'], 'avatar_');
 
             $model = new UtilisateurModel();
             $model->updatePhotoProfil($_SESSION['utilisateur_id'], $nomFichier);
@@ -113,6 +139,28 @@ class PostController extends Controller
 
         header('Location: /index.php?controller=post&action=profil');
         exit;
+    }
+
+    private function traiterUploadImage(array $fichier, string $prefixe): string
+    {
+        if ($fichier['size'] > self::TAILLE_IMAGE_MAX) {
+            $this->erreur('L\'image est trop volumineuse (5 Mo maximum).');
+        }
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $typeReel = finfo_file($finfo, $fichier['tmp_name']);
+        finfo_close($finfo);
+
+        if (!in_array($typeReel, self::TYPES_IMAGE_AUTORISES, true)) {
+            $this->erreur('Format d\'image non autorisé. Utilise un JPEG, PNG, GIF ou WebP.');
+        }
+
+        $extension = pathinfo($fichier['name'], PATHINFO_EXTENSION);
+        $nomFichier = uniqid($prefixe) . '.' . $extension;
+        $destination = __DIR__ . '/../../public/uploads/' . $nomFichier;
+        move_uploaded_file($fichier['tmp_name'], $destination);
+
+        return $nomFichier;
     }
 
     private function verifierAuth()

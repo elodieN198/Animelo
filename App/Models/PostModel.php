@@ -65,6 +65,24 @@ class PostModel extends DbConnect
         return array_map([$this, 'hydrate'], $rows);
     }
 
+    public function findById(int $id): ?Post
+    {
+        $stmt = $this->db->prepare(
+            'SELECT posts.*, utilisateurs.nom AS auteur_nom 
+             FROM posts 
+             JOIN utilisateurs ON posts.utilisateur_id = utilisateurs.id
+             WHERE posts.id = :id'
+        );
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        return $this->hydrate($row);
+    }
+
     public function incrementerLikes(int $postId): int
     {
         $stmt = $this->db->prepare('UPDATE posts SET nb_likes = nb_likes + 1 WHERE id = :id');
@@ -74,6 +92,12 @@ class PostModel extends DbConnect
         $stmt->execute(['id' => $postId]);
 
         return (int) $stmt->fetchColumn();
+    }
+
+    public function delete(int $id): void
+    {
+        $stmt = $this->db->prepare('DELETE FROM posts WHERE id = :id');
+        $stmt->execute(['id' => $id]);
     }
 
     private function hydrate(array $row): Post
