@@ -3,7 +3,7 @@
         <h1 class="h3 mb-1">Inscription</h1>
         <p class="text-muted mb-4">Rejoins la communauté Animelo.</p>
 
-        <form action="/index.php?controller=auth&action=traiterInscription" method="POST">
+        <form action="/?controller=auth&action=traiterInscription" method="POST">
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" id="nom" name="nom" class="form-control rounded-input" placeholder="Ton nom" required>
@@ -21,7 +21,7 @@
 
         <p class="text-center small text-muted mt-4 mb-0">
             Déjà inscrit ?
-            <a href="/index.php?controller=auth&action=connexion" style="color: var(--color-shu);">Se connecter</a>
+            <a href="/?controller=auth&action=connexion" style="color: var(--color-shu);">Se connecter</a>
         </p>
     </div>
 </div>

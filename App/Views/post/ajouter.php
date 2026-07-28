@@ -3,7 +3,7 @@
         <h1 class="h3 mb-1">Nouveau post</h1>
         <p class="text-muted mb-4">Partage l'animé que tu regardes en ce moment.</p>
 
-        <form action="/index.php?controller=post&action=traiterAjout" method="POST" enctype="multipart/form-data">
+        <form action="/?controller=post&action=traiterAjout" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="titreAnime" class="form-label">Titre de l'animé</label>
                 <input type="text" id="titreAnime" name="titreAnime" class="form-control rounded-input" placeholder="Ex : Naruto" required>
@@ -28,7 +28,7 @@
 
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-primary rounded-pill px-4">Publier</button>
-                <a href="/index.php?controller=post&action=index" class="btn btn-outline-secondary rounded-pill px-4">Annuler</a>
+                <a href="/?controller=post&action=index" class="btn btn-outline-secondary rounded-pill px-4">Annuler</a>
             </div>
         </form>
     </div>

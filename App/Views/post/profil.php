@@ -1,14 +1,14 @@
 <div class="d-flex justify-content-end gap-2 mb-3">
-    <a href="/index.php?controller=post&action=index" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
+    <a href="/?controller=post&action=index" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
         <i class="bi bi-house"></i> <span class="d-none d-sm-inline">Fil d'actualité</span>
     </a>
-    <a href="/index.php?controller=auth&action=deconnexion" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
+    <a href="/?controller=auth&action=deconnexion" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
         <i class="bi bi-box-arrow-right"></i> <span class="d-none d-sm-inline">Se déconnecter</span>
     </a>
 </div>
 
 <div class="d-flex align-items-center gap-3 mb-4">
-    <form action="/index.php?controller=post&action=modifierPhotoProfil" method="POST" enctype="multipart/form-data" id="avatarForm">
+    <form action="/?controller=post&action=modifierPhotoProfil" method="POST" enctype="multipart/form-data" id="avatarForm">
         <label for="avatarInput" class="avatar-upload">
             <?php if ($utilisateur->photoProfil): ?>
                 <img src="/uploads/<?= htmlspecialchars($utilisateur->photoProfil) ?>" alt="Photo de profil">
@@ -54,7 +54,7 @@
                     <?php else: ?>
                         <div class="instagram-tile-empty"></div>
                     <?php endif; ?>
-                    <a href="/index.php?controller=post&action=supprimer&id=<?= $post->id ?>"
+                    <a href="/?controller=post&action=supprimer&id=<?= $post->id ?>"
                        class="delete-post-btn"
                        onclick="return confirm('Supprimer ce post ?');"
                        aria-label="Supprimer ce post">

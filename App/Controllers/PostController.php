@@ -8,7 +8,7 @@ use App\Models\UtilisateurModel;
 class PostController extends Controller
 {
     private const TYPES_IMAGE_AUTORISES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-    private const TAILLE_IMAGE_MAX = 5 * 1024 * 1024; // 5 Mo
+    private const TAILLE_IMAGE_MAX = 5 * 1024 * 1024;
 
     public function index()
     {
@@ -55,7 +55,7 @@ class PostController extends Controller
         $model = new PostModel();
         $model->create($titreAnime, $description, $nomImage, $_SESSION['utilisateur_id']);
 
-        header('Location: /index.php?controller=post&action=index');
+        header('Location: /?controller=post&action=index');
         exit;
     }
 
@@ -84,7 +84,7 @@ class PostController extends Controller
 
         $model->delete($postId);
 
-        header('Location: /index.php?controller=post&action=profil');
+        header('Location: /?controller=post&action=profil');
         exit;
     }
 
@@ -137,7 +137,7 @@ class PostController extends Controller
             $model->updatePhotoProfil($_SESSION['utilisateur_id'], $nomFichier);
         }
 
-        header('Location: /index.php?controller=post&action=profil');
+        header('Location: /?controller=post&action=profil');
         exit;
     }
 
@@ -166,7 +166,7 @@ class PostController extends Controller
     private function verifierAuth()
     {
         if (!isset($_SESSION['utilisateur_id'])) {
-            header('Location: /index.php?controller=auth&action=connexion');
+            header('Location: /?controller=auth&action=connexion');
             exit;
         }
     }

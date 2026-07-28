@@ -38,7 +38,7 @@ class AuthController extends Controller
         $_SESSION['utilisateur_id'] = $id;
         $_SESSION['utilisateur_nom'] = $nom;
 
-        header('Location: /index.php?controller=post&action=index');
+        header('Location: /?controller=post&action=index');
         exit;
     }
 
@@ -63,14 +63,14 @@ class AuthController extends Controller
         $_SESSION['utilisateur_id'] = $utilisateur->id;
         $_SESSION['utilisateur_nom'] = $utilisateur->nom;
 
-        header('Location: /index.php?controller=post&action=index');
+        header('Location: /?controller=post&action=index');
         exit;
     }
 
     public function deconnexion()
     {
         session_destroy();
-        header('Location: /index.php?controller=auth&action=connexion');
+        header('Location: /?controller=auth&action=connexion');
         exit;
     }
 }

@@ -7,9 +7,9 @@ class HomeController extends Controller
     public function index()
     {
         if (isset($_SESSION['utilisateur_id'])) {
-            header('Location: /index.php?controller=post&action=index');
+            header('Location: /?controller=post&action=index');
         } else {
-            header('Location: /index.php?controller=auth&action=connexion');
+            header('Location: /?controller=auth&action=connexion');
         }
         exit;
     }

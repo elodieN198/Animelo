@@ -3,10 +3,10 @@
         <h1 class="h3 mb-0">Fil d'actualité</h1>
     </div>
     <div class="d-flex gap-2">
-        <a href="/index.php?controller=post&action=profil" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
+        <a href="/?controller=post&action=profil" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
             <i class="bi bi-person"></i> <span class="d-none d-sm-inline">Mon profil</span>
         </a>
-        <a href="/index.php?controller=auth&action=deconnexion" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
+        <a href="/?controller=auth&action=deconnexion" class="btn btn-outline-secondary rounded-pill btn-sm px-3">
             <i class="bi bi-box-arrow-right"></i> <span class="d-none d-sm-inline">Se déconnecter</span>
         </a>
     </div>
@@ -15,7 +15,7 @@
 <hr class="mb-4" style="border-color: var(--color-kin); opacity: 0.3;">
 
 <div class="d-flex flex-nowrap align-items-center gap-2 mb-4">
-    <form action="/index.php" method="GET" class="search-filter-bar flex-grow-1" id="filterForm">
+    <form action="/" method="GET" class="search-filter-bar flex-grow-1" id="filterForm">
         <input type="hidden" name="controller" value="post">
         <input type="hidden" name="action" value="index">
         <input type="hidden" name="tri" id="triInput" value="<?= htmlspecialchars($tri) ?>">
@@ -36,7 +36,7 @@
         </div>
     </form>
 
-    <a href="/index.php?controller=post&action=ajouter" class="btn btn-primary rounded-pill btn-new-post flex-shrink-0">
+    <a href="/?controller=post&action=ajouter" class="btn btn-primary rounded-pill btn-new-post flex-shrink-0">
         <i class="bi bi-plus-lg"></i> <span class="d-none d-sm-inline">Nouveau post</span>
     </a>
 </div>

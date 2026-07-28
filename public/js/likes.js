@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bouton.addEventListener('click', () => {
             const postId = bouton.dataset.postId;
 
-            fetch('/index.php?controller=post&action=like', {
+            fetch('/?controller=post&action=like', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

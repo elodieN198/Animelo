@@ -11,7 +11,7 @@
 <body>
     <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
-            <a href="/index.php?controller=home&action=index" class="navbar-brand mb-0 h1 text-decoration-none">Animelo</a>
+            <a href="/?controller=home&action=index" class="navbar-brand mb-0 h1 text-decoration-none">Animelo</a>
         </div>
     </nav>
 
@@ -29,8 +29,8 @@
                 <div class="col-md-4 mb-3 mb-md-0">
                     <h2 class="h6 text-uppercase" style="color: var(--color-kin);">Navigation</h2>
                     <ul class="list-unstyled small">
-                        <li><a href="/index.php?controller=post&action=index" class="text-decoration-none" style="color: #bbb;">Fil d'actualité</a></li>
-                        <li><a href="/index.php?controller=post&action=profil" class="text-decoration-none" style="color: #bbb;">Mon profil</a></li>
+                        <li><a href="/?controller=post&action=index" class="text-decoration-none" style="color: #bbb;">Fil d'actualité</a></li>
+                        <li><a href="/?controller=post&action=profil" class="text-decoration-none" style="color: #bbb;">Mon profil</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
