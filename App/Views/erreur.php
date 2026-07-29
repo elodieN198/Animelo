@@ -5,6 +5,6 @@
         </div>
         <h1 class="h4 mb-2">Oups, une erreur est survenue</h1>
         <p class="text-muted mb-4"><?= htmlspecialchars($message) ?></p>
-        <a href="/?controller=post&action=index" class="btn btn-primary rounded-pill px-4">Retour au fil d'actualité</a>
+        <a href="<?= htmlspecialchars($retourUrl) ?>" class="btn btn-primary rounded-pill px-4"><?= htmlspecialchars($retourLabel) ?></a>
     </div>
 </div>

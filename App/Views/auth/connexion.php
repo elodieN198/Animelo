@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
     <div class="post-form-card">
         <h1 class="h3 mb-1">Connexion</h1>
-        <p class="text-muted mb-4">Contente de te revoir sur Animelo.</p>
+        <p class="text-muted mb-4">Nous sommes heureux de te revoir sur Animelo.</p>
 
         <form action="/?controller=auth&action=traiterConnexion" method="POST">
             <div class="mb-3">

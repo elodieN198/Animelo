@@ -23,12 +23,18 @@ abstract class Controller
         require __DIR__ . '/../Views/base.php';
     }
 
-    protected function erreur(string $message, int $code = 400): void
-    {
+    protected function erreur(
+        string $message,
+        int $code = 400,
+        string $retourUrl = '/?controller=post&action=index',
+        string $retourLabel = 'Retour au fil d\'actualité'
+    ): void {
         http_response_code($code);
         $this->render('erreur', [
             'title' => 'Erreur - Animelo',
             'message' => $message,
+            'retourUrl' => $retourUrl,
+            'retourLabel' => $retourLabel,
         ]);
         exit;
     }

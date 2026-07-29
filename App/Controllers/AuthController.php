@@ -18,17 +18,17 @@ class AuthController extends Controller
         $motDePasse = $_POST['motDePasse'] ?? '';
 
         if ($nom === '' || $email === '' || $motDePasse === '') {
-            $this->erreur('Tous les champs sont obligatoires !');
+            $this->erreur('Tous les champs sont obligatoires !', 400, '/?controller=auth&action=inscription', 'Retour à l\'inscription');
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->erreur('Adresse email invalide !');
+            $this->erreur('Adresse email invalide !', 400, '/?controller=auth&action=inscription', 'Retour à l\'inscription');
         }
 
         $model = new UtilisateurModel();
 
         if ($model->findByEmail($email)) {
-            $this->erreur('Cet email est déjà utilisé !');
+            $this->erreur('Cet email est déjà utilisé !', 400, '/?controller=auth&action=inscription', 'Retour à l\'inscription');
         }
 
         $motDePasseHache = password_hash($motDePasse, PASSWORD_DEFAULT);
@@ -56,7 +56,7 @@ class AuthController extends Controller
         $utilisateur = $model->findByEmail($email);
 
         if (!$utilisateur || !password_verify($motDePasse, $utilisateur->motDePasse)) {
-            $this->erreur('Email ou mot de passe incorrect !', 401);
+            $this->erreur('Email ou mot de passe incorrect !', 401, '/?controller=auth&action=connexion', 'Retour à la connexion');
         }
 
         session_regenerate_id(true);
