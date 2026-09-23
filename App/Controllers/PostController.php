@@ -149,7 +149,6 @@ class PostController extends Controller
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $typeReel = finfo_file($finfo, $fichier['tmp_name']);
-        finfo_close($finfo);
 
         if (!in_array($typeReel, self::TYPES_IMAGE_AUTORISES, true)) {
             $this->erreur('Format d\'image non autorisé. Utilise un JPEG, PNG, GIF ou WebP.');
