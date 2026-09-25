@@ -5,11 +5,21 @@ namespace App\Controllers;
 use App\Models\PostModel;
 use App\Models\UtilisateurModel;
 
+/**
+ * Gère les publications : fil d'actualité, création, suppression,
+ * likes et profil. Toutes les actions sont réservées aux utilisateurs connectés.
+ */
 class PostController extends Controller
 {
+    /** Types d'images acceptés à l'envoi */
     private const TYPES_IMAGE_AUTORISES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    /** Taille maximale d'une image : 5 Mo */
     private const TAILLE_IMAGE_MAX = 5 * 1024 * 1024;
 
+    /**
+     * Affiche le fil d'actualité, avec recherche par titre
+     * et tri par date ou par nombre de likes.
+     */
     public function index()
     {
         $this->verifierAuth();
@@ -28,6 +38,9 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * Affiche le formulaire de création d'un post.
+     */
     public function ajouter()
     {
         $this->verifierAuth();
@@ -35,6 +48,10 @@ class PostController extends Controller
         $this->render('post/ajouter', ['title' => 'Nouveau post - Animelo']);
     }
 
+    /**
+     * Traite le formulaire de création : vérifie le titre,
+     * enregistre l'image éventuelle, puis crée le post.
+     */
     public function traiterAjout()
     {
         $this->verifierAuth();
@@ -59,6 +76,12 @@ class PostController extends Controller
         exit;
     }
 
+    /**
+     * Supprime un post et son image.
+     *
+     * Vérifie d'abord que le post existe (sinon erreur 404)
+     * et que l'utilisateur connecté en est l'auteur (sinon erreur 403).
+     */
     public function supprimer()
     {
         $this->verifierAuth();
@@ -88,6 +111,11 @@ class PostController extends Controller
         exit;
     }
 
+    /**
+     * Reçoit la requête AJAX du bouton Like, incrémente le compteur
+     * et renvoie le nouveau total au format JSON.
+     * Renvoie une erreur 400 si l'identifiant du post est invalide.
+     */
     public function like()
     {
         $this->verifierAuth();
@@ -109,6 +137,9 @@ class PostController extends Controller
         exit;
     }
 
+    /**
+     * Affiche le profil de l'utilisateur connecté et ses publications.
+     */
     public function profil()
     {
         $this->verifierAuth();
@@ -126,6 +157,9 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * Enregistre une nouvelle photo de profil pour l'utilisateur connecté.
+     */
     public function modifierPhotoProfil()
     {
         $this->verifierAuth();
@@ -141,6 +175,16 @@ class PostController extends Controller
         exit;
     }
 
+    /**
+     * Vérifie puis enregistre une image envoyée par l'utilisateur.
+     *
+     * Contrôle la taille (5 Mo maximum) et le type réel du fichier
+     * avec finfo_file(), puis l'enregistre dans public/uploads sous un nom unique.
+     *
+     * @param array  $fichier Fichier issu de $_FILES
+     * @param string $prefixe Préfixe du nom de fichier ('post_' ou 'avatar_')
+     * @return string Nom du fichier enregistré
+     */
     private function traiterUploadImage(array $fichier, string $prefixe): string
     {
         if ($fichier['size'] > self::TAILLE_IMAGE_MAX) {
@@ -162,6 +206,9 @@ class PostController extends Controller
         return $nomFichier;
     }
 
+    /**
+     * Redirige vers la page de connexion si aucun utilisateur n'est connecté.
+     */
     private function verifierAuth()
     {
         if (!isset($_SESSION['utilisateur_id'])) {
